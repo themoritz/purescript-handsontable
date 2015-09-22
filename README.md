@@ -1,6 +1,6 @@
 # purescript-handsontable
 
-Purescript bindings for [http://handsontable.com/](Handsontable).
+Purescript bindings for [Handsontable](http://handsontable.com/).
 
 ## Test
 
