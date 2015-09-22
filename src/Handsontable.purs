@@ -9,7 +9,7 @@ import Prelude
 import Data.Function
 import Control.Monad.Eff
 
-import DOM.HTML.Types (HTMLElement())
+import Data.DOM.Simple.Types (HTMLElement())
 
 import Handsontable.Options
 import Handsontable.Types
