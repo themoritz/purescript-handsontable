@@ -6,6 +6,6 @@ foreign import data HOT :: !
 
 foreign import data Handsontable :: *
 
-foreign import data OptAutoColumnSize :: *
+type Options dat r = { data :: DataTable dat | r }
 
 type DataTable dat = Array (Array dat)
