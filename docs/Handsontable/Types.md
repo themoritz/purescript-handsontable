@@ -12,6 +12,12 @@ data HOT :: !
 data Handsontable :: *
 ```
 
+#### `CellEditor`
+
+``` purescript
+data CellEditor :: *
+```
+
 #### `MaybeNull`
 
 ``` purescript

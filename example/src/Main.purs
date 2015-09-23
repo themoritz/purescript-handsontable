@@ -32,9 +32,12 @@ main = do
       _          -> log "unknown change cause"
   hot `onBeforeOnCellMouseDown` \ev coords _ -> do
     evType <- mouseEventType ev
-    log $ (show evType) <> ": " <> (show coords.row) <> " " <> (show coords.col)
+    log $ show evType <> ": " <> show coords.row <> " " <> show coords.col
 
   alter InsertRow (Just 0) 2 Nothing false hot
+  clear hot
+  offset <- colOffset hot
+  log $ "offset: " <> show offset
 
 setCellProps :: forall r. Int -> Int -> { checkedTemplate :: Boolean | r } -> { checkedTemplate :: Boolean | r }
 setCellProps row col prop = if row == col

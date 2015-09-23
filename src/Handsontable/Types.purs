@@ -9,6 +9,7 @@ import Data.Foreign.Class
 foreign import data HOT :: !
 
 foreign import data Handsontable :: *
+foreign import data CellEditor :: *
 
 foreign import data MaybeNull :: * -> *
 
