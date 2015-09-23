@@ -10,6 +10,8 @@ foreign import data HOT :: !
 
 foreign import data Handsontable :: *
 
+foreign import data MaybeNull :: * -> *
+
 type Options dat r = { data :: DataTable dat | r }
 
 type DataTable dat = Array (Array dat)
@@ -37,3 +39,17 @@ readChangeSource "loadData"          = pure ChangeLoadData
 readChangeSource "autofill"          = pure ChangeAutofill
 readChangeSource "paste"             = pure ChangePaste
 readChangeSource s                   = Left $ TypeMismatch ("'" ++ s ++ "'") " a valid change cause value"
+
+data AlterAction
+  = InsertRow
+  | InsertCol
+  | RemoveRow
+  | RemoveCol
+
+instance showAlterAction :: Show AlterAction where
+  show InsertRow = "insert_row"
+  show InsertCol = "insert_col"
+  show RemoveRow = "remove_row"
+  show RemoveCol = "remove_col"
+
+

@@ -23,6 +23,7 @@ gulp.task('docs', function() {
     src: sources,
     docgen: {
       "Handsontable": "docs/Handsontable.md",
+      "Handsontable.Hooks": "docs/Handsontable/Hooks.md",
       "Handsontable.Types": "docs/Handsontable/Types.md"
     }
   });

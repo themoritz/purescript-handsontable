@@ -26,5 +26,11 @@ function effize(method) {
   };
 }
 
+exports.fromNothing = function() { return null; };
+exports.fromJust    = function(x) { return x; };
+
+//
+
+exports.alterImpl = effize("alter");
 exports.getData = effize("getData");
 exports.updateSettingsImpl = effize("updateSettings");

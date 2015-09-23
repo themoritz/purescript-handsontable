@@ -4,6 +4,7 @@ import Prelude
 
 import Control.Monad.Eff.Console
 import Data.Function
+import Data.Maybe
 
 import Handsontable
 import Handsontable.Types
@@ -32,6 +33,8 @@ main = do
   hot `onBeforeOnCellMouseDown` \ev coords _ -> do
     evType <- mouseEventType ev
     log $ (show evType) <> ": " <> (show coords.row) <> " " <> (show coords.col)
+
+  alter InsertRow (Just 0) 2 Nothing false hot
 
 setCellProps :: forall r. Int -> Int -> { checkedTemplate :: Boolean | r } -> { checkedTemplate :: Boolean | r }
 setCellProps row col prop = if row == col
