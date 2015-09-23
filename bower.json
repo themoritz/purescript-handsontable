@@ -13,8 +13,9 @@
     "tests"
   ],
   "dependencies": {
+    "purescript-console": "0.1.1",
     "purescript-simple-dom": "0.1.0",
-    "purescript-console": "0.1.1"
+    "purescript-foreign": "0.5.0"
   },
   "devDependencies": {
     "handsontable": "0.18.0"

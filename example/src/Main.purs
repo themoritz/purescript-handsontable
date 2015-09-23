@@ -9,6 +9,7 @@ import Handsontable
 import Handsontable.Types
 import Handsontable.Hooks
 
+import Data.DOM.Simple.Events
 
 main = do
   hot <- handsontable "handsontable" $
@@ -24,12 +25,15 @@ main = do
         , left: { width: 2, color: "red" }
         }]
     }
-  hot `onAfterChange` \_ cause -> log cause
-  log "created hot node"
+  hot `onAfterChange` \_ cause -> do
+    case cause of
+      ChangeEdit -> log "edited"
+      _          -> log "unknown change cause"
+  hot `onBeforeOnCellMouseDown` \ev coords _ -> do
+    evType <- mouseEventType ev
+    log $ (show evType) <> ": " <> (show coords.row) <> " " <> (show coords.col)
 
 setCellProps :: forall r. Int -> Int -> { checkedTemplate :: Boolean | r } -> { checkedTemplate :: Boolean | r }
 setCellProps row col prop = if row == col
   then prop { checkedTemplate = true }
   else prop { checkedTemplate = false }
-
-
