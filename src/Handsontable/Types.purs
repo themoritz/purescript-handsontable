@@ -4,6 +4,8 @@ import Prelude
 
 foreign import data HOT :: !
 
-data Handsontable
+foreign import data Handsontable :: *
+
+foreign import data OptAutoColumnSize :: *
 
 type DataTable dat = Array (Array dat)
