@@ -9,7 +9,7 @@ data HOT :: !
 #### `Handsontable`
 
 ``` purescript
-data Handsontable :: *
+data Handsontable :: * -> *
 ```
 
 #### `CellEditor`
@@ -27,13 +27,13 @@ data MaybeNull :: * -> *
 #### `Options`
 
 ``` purescript
-type Options dat r = { data :: DataTable dat | r }
+type Options d r = { data :: DataTable d | r }
 ```
 
 #### `DataTable`
 
 ``` purescript
-type DataTable dat = Array (Array dat)
+type DataTable d = Array (Array d)
 ```
 
 #### `Coords`
@@ -53,6 +53,13 @@ data ChangeSource
   | ChangeLoadData
   | ChangeAutofill
   | ChangePaste
+  | ChangeSpliceCol
+  | ChangeSpliceRow
+```
+
+##### Instances
+``` purescript
+instance showChangeSource :: Show ChangeSource
 ```
 
 #### `readChangeSource`
@@ -74,6 +81,41 @@ data AlterAction
 ##### Instances
 ``` purescript
 instance showAlterAction :: Show AlterAction
+```
+
+#### `PopulateMethod`
+
+``` purescript
+data PopulateMethod
+  = Overwrite
+  | ShiftDown
+  | ShiftRight
+```
+
+##### Instances
+``` purescript
+instance showPopulateMethod :: Show PopulateMethod
+```
+
+#### `readPopulateMethod`
+
+``` purescript
+readPopulateMethod :: String -> F PopulateMethod
+```
+
+#### `Direction`
+
+``` purescript
+data Direction
+  = DirectionLeft
+  | DirectionRight
+  | DirectionUp
+  | DirectionDown
+```
+
+##### Instances
+``` purescript
+instance showDirection :: Show Direction
 ```
 
 
