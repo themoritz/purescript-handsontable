@@ -9,3 +9,20 @@ exports.addHookImpl = function(key, fn, self) {
     });
   };
 };
+
+exports.onAfterChangeImpl = function(fn, self) {
+  return function() {
+    return self.addHook("afterChange", function(changes, source) {
+      if (changes != null) {
+        var changeObjs = changes.map(function(change) {
+          return {
+            row: change[0],
+            col: change[1],
+            value: change[3]
+          };
+        });
+        fn(changeObjs)(source)();
+      }
+    });
+  };
+};

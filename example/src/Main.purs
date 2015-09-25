@@ -4,6 +4,7 @@ import Prelude
 
 import Control.Monad.Eff.Console
 import Data.Function
+import Data.Foldable
 import Data.Maybe
 
 import Handsontable
@@ -43,10 +44,10 @@ main = do
       ]
     }
 
-  hot `onAfterChange` \_ cause -> do
-    case cause of
-      ChangeEdit -> log "edited"
-      _          -> log "unknown change cause"
+  hot `onAfterChange` \changes cause -> do
+    print cause
+    for_ changes \change -> do
+      log $ "row " <> show change.row <> " col " <> show change.col <> " value " <> show change.value
   hot `onBeforeOnCellMouseDown` \ev coords _ -> do
     evType <- mouseEventType ev
     log $ show evType <> ": " <> show coords.row <> " " <> show coords.col

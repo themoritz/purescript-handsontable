@@ -22,6 +22,12 @@ type Coords =
   , col :: Int
   }
 
+type Change =
+  { row :: Int
+  , col :: Int
+  , value :: String
+  }
+
 data ChangeSource
   = ChangeAlter
   | ChangeEmpty
