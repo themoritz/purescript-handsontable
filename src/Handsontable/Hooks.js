@@ -18,7 +18,8 @@ exports.onAfterChangeImpl = function(fn, self) {
           return {
             row: change[0],
             col: change[1],
-            value: change[3]
+            old: change[2],
+            new: change[3]
           };
         });
         fn(changeObjs)(source)();

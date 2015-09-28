@@ -3,6 +3,7 @@ module Handsontable.Types where
 import Prelude
 
 import Data.Either
+import Data.Maybe
 import Data.Foreign
 import Data.Foreign.Class
 
@@ -22,10 +23,11 @@ type Coords =
   , col :: Int
   }
 
-type Change =
+type Change d =
   { row :: Int
   , col :: Int
-  , value :: String
+  , old :: Maybe d
+  , new :: String
   }
 
 data ChangeSource

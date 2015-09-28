@@ -59,6 +59,7 @@ import Prelude
 import Control.Monad.Eff
 import Control.Monad.ST
 
+import Data.Nullable
 import Data.Either.Unsafe (fromRight)
 import Data.Array.ST
 import Data.DOM.Simple.Types (HTMLElement(), DOMEvent())
@@ -73,11 +74,11 @@ foreign import addHookImpl :: forall ev1 ev2 ev3 ev4 ev5 ev6 eff d a. Fn3 String
 onAfterCellMetaReset :: forall eff d a. Handsontable d -> (Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
 onAfterCellMetaReset self fn = runFn3 addHookImpl "afterCellMetaReset" (\_ _ _ _ _ _ -> fn) self
 
-foreign import onAfterChangeImpl :: forall eff d a. Fn2 ((Array Change) -> String -> Eff (hot :: HOT | eff) a) (Handsontable d) (Eff (hot :: HOT | eff) Unit)
+foreign import onAfterChangeImpl :: forall eff d a. Fn2 ((Array {row :: Int, col :: Int, old :: Nullable d, new :: String}) -> String -> Eff (hot :: HOT | eff) a) (Handsontable d) (Eff (hot :: HOT | eff) Unit)
 
--- TOO: callback ignores old value ATM because it can be null/undefined. Should be changed to maybe and handled properly
-onAfterChange :: forall eff d a. Handsontable d -> (Array Change -> ChangeSource -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
-onAfterChange self fn = runFn2 onAfterChangeImpl (\changes source -> fn changes (fromRight $ readChangeSource source)) self
+onAfterChange :: forall eff d a. Handsontable d -> (Array (Change d) -> ChangeSource -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
+onAfterChange self fn = runFn2 onAfterChangeImpl (\changes source -> fn (procChange <$> changes) (fromRight $ readChangeSource source)) self
+  where procChange change = change { old = toMaybe change.old }
 
 onAfterCreateCol :: forall eff d a. Handsontable d -> (Int -> Int -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
 onAfterCreateCol self fn = runFn3 addHookImpl "afterCreateCol" (\index amount _ _ _ _ -> fn index amount) self

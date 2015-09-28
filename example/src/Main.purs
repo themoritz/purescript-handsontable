@@ -47,7 +47,7 @@ main = do
   hot `onAfterChange` \changes cause -> do
     print cause
     for_ changes \change -> do
-      log $ "row " <> show change.row <> " col " <> show change.col <> " value " <> show change.value
+      log $ "row " <> show change.row <> " col " <> show change.col <> " old " <> show change.old <> " new " <> show change.new
   hot `onBeforeOnCellMouseDown` \ev coords _ -> do
     evType <- mouseEventType ev
     log $ show evType <> ": " <> show coords.row <> " " <> show coords.col
