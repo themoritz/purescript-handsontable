@@ -62,7 +62,8 @@ import Control.Monad.ST
 import Data.Nullable
 import Data.Either.Unsafe (fromRight)
 import Data.Array.ST
-import Data.DOM.Simple.Types (HTMLElement(), DOMEvent())
+import DOM.HTML.Types (HTMLElement())
+import DOM.Event.Types (Event())
 
 import Data.Function
 import Data.Foreign
@@ -116,13 +117,13 @@ onAfterLoadData self fn = runFn3 addHookImpl "afterLoadData" (\_ _ _ _ _ _ -> fn
 -- TODO: missing in API doc
 
 -- TODO: migrate to purescript-dom and MouseEvent
-onAfterOnCellCornerMouseDown :: forall eff d a. Handsontable d -> (DOMEvent -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
+onAfterOnCellCornerMouseDown :: forall eff d a. Handsontable d -> (Event -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
 onAfterOnCellCornerMouseDown self fn = runFn3 addHookImpl "afterOnCellCornerMouseDown" (\ev _ _ _ _ _ -> fn ev) self
 
-onAfterOnCellMouseDown :: forall eff d a. Handsontable d -> (DOMEvent -> Coords -> HTMLElement -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
+onAfterOnCellMouseDown :: forall eff d a. Handsontable d -> (Event -> Coords -> HTMLElement -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
 onAfterOnCellMouseDown self fn = runFn3 addHookImpl "afterOnCellMouseDown" (\ev coords td _ _ _ -> fn ev coords td) self
 
-onAfterOnCellMouseOver :: forall eff d a. Handsontable d -> (DOMEvent -> Coords -> HTMLElement -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
+onAfterOnCellMouseOver :: forall eff d a. Handsontable d -> (Event -> Coords -> HTMLElement -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
 onAfterOnCellMouseOver self fn = runFn3 addHookImpl "afterOnCellMouseOver" (\ev coords td _ _ _ -> fn ev coords td) self
 
 onAfterRemoveCol :: forall eff d a. Handsontable d -> (Int -> Int -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
@@ -192,10 +193,10 @@ onBeforeInitWalkontable :: forall eff d a. Handsontable d -> (Eff (hot :: HOT | 
 onBeforeInitWalkontable self fn = runFn3 addHookImpl "beforeInitWalkontable" (\_ _ _ _ _ _ -> fn) self
 
 -- TODO: migrate to purescript-dom
-onBeforeKeyDown :: forall eff d a. Handsontable d -> (DOMEvent -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
+onBeforeKeyDown :: forall eff d a. Handsontable d -> (Event -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
 onBeforeKeyDown self fn = runFn3 addHookImpl "beforeKeyDown" (\ev _ _ _ _ _ -> fn ev) self
 
-onBeforeOnCellMouseDown :: forall eff d a. Handsontable d -> (DOMEvent -> Coords -> HTMLElement -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
+onBeforeOnCellMouseDown :: forall eff d a. Handsontable d -> (Event -> Coords -> HTMLElement -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
 onBeforeOnCellMouseDown self fn = runFn3 addHookImpl "beforeOnCellMouseDown" (\ev coords td _ _ _ -> fn ev coords td) self
 
 onBeforeRemoveCol :: forall eff d a. Handsontable d -> (Int -> Int -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit

@@ -82,7 +82,7 @@ import Data.Foreign hiding (isNull)
 import Data.Function
 import Data.Nullable
 
-import Data.DOM.Simple.Types (HTMLElement())
+import DOM.HTML.Types (HTMLElement())
 
 import Handsontable.Types
 

@@ -11,7 +11,8 @@ import Handsontable
 import Handsontable.Types
 import Handsontable.Hooks
 
-import Data.DOM.Simple.Events
+import DOM.Event.Types (EventType(..))
+import DOM.Event.Event (type_)
 
 main = do
   hot <- handsontable "handsontable" $
@@ -48,9 +49,9 @@ main = do
     print cause
     for_ changes \change -> do
       log $ "row " <> show change.row <> " col " <> show change.col <> " old " <> show change.old <> " new " <> show change.new
-  hot `onBeforeOnCellMouseDown` \ev coords _ -> do
-    evType <- mouseEventType ev
-    log $ show evType <> ": " <> show coords.row <> " " <> show coords.col
+  hot `onBeforeOnCellMouseDown` \ev coords _ ->
+    case type_ ev of
+      (EventType typ) -> log $ typ <> ": " <> show coords.row <> " " <> show coords.col
 
   alter InsertRow (Just 0) 2 Nothing false hot
   offset <- colOffset hot
