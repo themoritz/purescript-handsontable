@@ -1,19 +1,17 @@
 module Main where
-
-import Prelude
-
-import Control.Monad.Eff.Console
-import Data.Function
-import Data.Foldable
-import Data.Maybe
-
 import Handsontable
-import Handsontable.Types
-import Handsontable.Hooks
-
-import DOM.Event.Types (EventType(..))
+import Control.Monad.Eff (Eff)
+import Control.Monad.Eff.Console (CONSOLE, print, log)
 import DOM.Event.Event (type_)
+import DOM.Event.Types (EventType(..))
+import Data.Foldable (for_)
+import Data.Function (mkFn3)
+import Data.Maybe (Maybe(Nothing, Just))
+import Handsontable.Hooks (onBeforeOnCellMouseDown, onAfterChange)
+import Handsontable.Types (HOT, AlterAction(InsertRow), Direction(DirectionDown), PopulateMethod(ShiftDown))
+import Prelude (Unit, (==), bind, (<>), ($), show)
 
+main :: Eff (hot :: HOT, console :: CONSOLE) Unit
 main = do
   hot <- handsontable "handsontable" $
     { data:

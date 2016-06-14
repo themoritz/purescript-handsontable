@@ -54,19 +54,18 @@ module Handsontable.Hooks
   -- , onPersistentStateSave
   ) where
 
-import Prelude
+import Prelude (Unit, ($), flip, (>>=), (<$>))
 
-import Control.Monad.Eff
-import Control.Monad.ST
-
-import Data.Nullable
+import Control.Monad.Eff (Eff)
+import Control.Monad.ST (ST, runST)
+import Data.Nullable (Nullable, toMaybe)
 import Data.Either.Unsafe (fromRight)
-import Data.Array.ST
+import Data.Array.ST (STArray, thaw)
 import DOM.HTML.Types (HTMLElement())
 import DOM.Event.Types (Event())
 
-import Data.Function
-import Data.Foreign
+import Data.Function (Fn2, Fn3, runFn3, runFn2)
+import Data.Foreign (Foreign)
 
 import Handsontable.Types
 
@@ -75,7 +74,7 @@ foreign import addHookImpl :: forall ev1 ev2 ev3 ev4 ev5 ev6 eff d a. Fn3 String
 onAfterCellMetaReset :: forall eff d a. Handsontable d -> (Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
 onAfterCellMetaReset self fn = runFn3 addHookImpl "afterCellMetaReset" (\_ _ _ _ _ _ -> fn) self
 
-foreign import onAfterChangeImpl :: forall eff d a. Fn2 ((Array {row :: Int, col :: Int, old :: Nullable d, new :: String}) -> String -> Eff (hot :: HOT | eff) a) (Handsontable d) (Eff (hot :: HOT | eff) Unit)
+foreign import onAfterChangeImpl :: forall eff d a. Fn2 ((Array {row :: Int, col :: Int, old :: Nullable d, new :: d}) -> String -> Eff (hot :: HOT | eff) a) (Handsontable d) (Eff (hot :: HOT | eff) Unit)
 
 onAfterChange :: forall eff d a. Handsontable d -> (Array (Change d) -> ChangeSource -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
 onAfterChange self fn = runFn2 onAfterChangeImpl (\changes source -> fn (procChange <$> changes) (fromRight $ readChangeSource source)) self

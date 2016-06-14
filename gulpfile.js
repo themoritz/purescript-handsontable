@@ -1,62 +1,69 @@
 'use strict'
 
-var gulp        = require('gulp'),
-    purescript  = require('gulp-purescript');
+var gulp = require('gulp')
+var purescript = require('gulp-purescript')
+var browserify = require('browserify')
+var vinyl = require('vinyl-source-stream')
 
 var sources = [
   'src/**/*.purs',
   'bower_components/purescript-*/src/**/*.purs'
-];
+]
 var foreigns = [
   'src/**/*.js',
   'bower_components/purescript-*/src/**/*.js'
-];
+]
 var exampleSources = [
   'example/src/**/*.purs'
-];
-var exampleForeigns = [
-  'example/src/**/*.js'
-];
+]
 
-gulp.task('docs', function() {
+gulp.task('docs', function () {
   return purescript.pscDocs({
     src: sources,
     docgen: {
-      "Handsontable": "docs/Handsontable.md",
-      "Handsontable.Hooks": "docs/Handsontable/Hooks.md",
-      "Handsontable.Types": "docs/Handsontable/Types.md"
+      'Handsontable': 'docs/Handsontable.md',
+      'Handsontable.Hooks': 'docs/Handsontable/Hooks.md',
+      'Handsontable.Types': 'docs/Handsontable/Types.md'
     }
-  });
-});
+  })
+})
 
-gulp.task('make', function() {
+gulp.task('make', function () {
   return purescript.psc({
     src: sources,
     ffi: foreigns
-  });
-});
+  })
+})
 
-gulp.task('example', function() {
+gulp.task('example', function () {
   return purescript.psc({
     src: sources.concat(exampleSources),
-    ffi: foreigns.concat(exampleForeigns)
-  });
-});
+    ffi: foreigns
+  })
+})
 
-gulp.task('bundle', ['example'], function() {
+gulp.task('bundle', ['example'], function () {
   return purescript.pscBundle({
     src: 'output/**/*.js',
-    output: 'example/handsontable.js',
-    main: "Main"
-  });
-});
+    output: 'dist/main.js',
+    main: 'Main'
+  })
+})
 
-gulp.task('watch-browser', function() {
-  gulp.watch(sources.concat(exampleSources).concat(foreigns).concat(exampleForeigns), 'bundle');
-});
+gulp.task('browserify', ['bundle'], function () {
+  return browserify('dist/main.js')
+    .require(['moment', 'pikaday', 'zeroclipboard'])
+    .bundle()
+    .pipe(vinyl('handsontable.js'))
+    .pipe(gulp.dest('example'))
+})
 
-gulp.task('watch-make', function() {
-  gulp.watch(sources.concat(foreigns), 'make');
-});
+gulp.task('watch-browser', function () {
+  gulp.watch(sources.concat(exampleSources).concat(foreigns), 'bundle')
+})
 
-gulp.task('default', ['make']);
+gulp.task('watch-make', function () {
+  gulp.watch(sources.concat(foreigns), 'make')
+})
+
+gulp.task('default', ['make'])

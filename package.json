@@ -10,8 +10,17 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "browserify": "^13.0.1",
+    "debowerify": "^1.5.0",
     "gulp": "^3.9.0",
-    "gulp-purescript": "^0.6.0",
-    "purescript": "^0.7.4"
+    "gulp-purescript": "^0.8.0",
+    "purescript": "^0.8.5",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "dependencies": {
+    "handsontable": "^0.25.1",
+    "moment": "^2.13.0",
+    "pikaday": "^1.4.0",
+    "zeroclipboard": "^2.2.0"
   }
 }

@@ -1,11 +1,9 @@
 module Handsontable.Types where
 
-import Prelude
-
-import Data.Either
-import Data.Maybe
+import Prelude (class Show, (++), ($), pure)
+import Data.Either (Either(Left))
+import Data.Maybe (Maybe)
 import Data.Foreign
-import Data.Foreign.Class
 
 foreign import data HOT :: !
 
@@ -27,7 +25,7 @@ type Change d =
   { row :: Int
   , col :: Int
   , old :: Maybe d
-  , new :: String
+  , new :: d
   }
 
 data ChangeSource

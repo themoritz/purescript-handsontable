@@ -72,15 +72,13 @@ module Handsontable
   , validateCells
   ) where
 
-import Prelude
-
-import Control.Monad.Eff
-
-import Data.Maybe
-import Data.Tuple
-import Data.Foreign hiding (isNull)
-import Data.Function
-import Data.Nullable
+import Prelude (Unit, show, (<$>), ($))
+import Control.Monad.Eff (Eff)
+import Data.Maybe (Maybe(Just, Nothing))
+import Data.Tuple (Tuple(Tuple))
+import Data.Foreign (Foreign)
+import Data.Function (Fn2, Fn3, Fn5, Fn4, Fn7, Fn10, Fn6, runFn2, runFn3, runFn5, runFn4, runFn7, runFn10, runFn6)
+import Data.Nullable (Nullable, toNullable, toMaybe)
 
 import DOM.HTML.Types (HTMLElement())
 
@@ -104,7 +102,7 @@ foreign import alterImpl :: forall eff d. Fn6 String (Nullable Int) Int (Nullabl
 -- | If the second argument is `Nothing`, the data will be inserted after the last column/row.
 -- |
 -- | `alter action index amount source keepEmpty hot`.
-alter :: forall eff d a. AlterAction -> Maybe Int -> Int -> Maybe ChangeSource -> Boolean -> Handsontable d -> Eff (hot :: HOT | eff) Unit
+alter :: forall eff d. AlterAction -> Maybe Int -> Int -> Maybe ChangeSource -> Boolean -> Handsontable d -> Eff (hot :: HOT | eff) Unit
 alter action index amount source keepEmpty hot = runFn6 alterImpl (show action) (toNullable index) amount (toNullable $ show <$> source) keepEmpty hot
 
 -- | Clears the grid.
