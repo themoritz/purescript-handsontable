@@ -3,7 +3,7 @@
 #### `onAfterChange`
 
 ``` purescript
-onAfterChange :: forall eff d a. Handsontable d -> (DataTable d -> ChangeSource -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
+onAfterChange :: forall eff d a. Handsontable d -> (Array (Change d) -> ChangeSource -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
 ```
 
 #### `onAfterCreateCol`
@@ -15,13 +15,13 @@ onAfterCreateCol :: forall eff d a. Handsontable d -> (Int -> Int -> Eff (hot ::
 #### `onAfterDeselect`
 
 ``` purescript
-onAfterDeselect :: forall eff d a. Handsontable d -> Eff (hot :: HOT | eff) a -> Eff (hot :: HOT | eff) Unit
+onAfterDeselect :: forall eff d a. Handsontable d -> (Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
 ```
 
 #### `onAfterDestroy`
 
 ``` purescript
-onAfterDestroy :: forall eff d a. Handsontable d -> Eff (hot :: HOT | eff) a -> Eff (hot :: HOT | eff) Unit
+onAfterDestroy :: forall eff d a. Handsontable d -> (Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
 ```
 
 #### `onAfterGetCellMeta`
@@ -39,31 +39,31 @@ onAfterGetColHeader :: forall eff d a. Handsontable d -> (Int -> HTMLElement -> 
 #### `onAfterInit`
 
 ``` purescript
-onAfterInit :: forall eff d a. Handsontable d -> Eff (hot :: HOT | eff) a -> Eff (hot :: HOT | eff) Unit
+onAfterInit :: forall eff d a. Handsontable d -> (Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
 ```
 
 #### `onAfterLoadData`
 
 ``` purescript
-onAfterLoadData :: forall eff d a. Handsontable d -> Eff (hot :: HOT | eff) a -> Eff (hot :: HOT | eff) Unit
+onAfterLoadData :: forall eff d a. Handsontable d -> (Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
 ```
 
 #### `onAfterOnCellCornerMouseDown`
 
 ``` purescript
-onAfterOnCellCornerMouseDown :: forall eff d a. Handsontable d -> (DOMEvent -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
+onAfterOnCellCornerMouseDown :: forall eff d a. Handsontable d -> (Event -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
 ```
 
 #### `onAfterOnCellMouseDown`
 
 ``` purescript
-onAfterOnCellMouseDown :: forall eff d a. Handsontable d -> (DOMEvent -> Coords -> HTMLElement -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
+onAfterOnCellMouseDown :: forall eff d a. Handsontable d -> (Event -> Coords -> HTMLElement -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
 ```
 
 #### `onAfterOnCellMouseOver`
 
 ``` purescript
-onAfterOnCellMouseOver :: forall eff d a. Handsontable d -> (DOMEvent -> Coords -> HTMLElement -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
+onAfterOnCellMouseOver :: forall eff d a. Handsontable d -> (Event -> Coords -> HTMLElement -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
 ```
 
 #### `onAfterRemoveCol`
@@ -123,7 +123,7 @@ onAfterSetCellMeta :: forall eff d a. Handsontable d -> (Int -> Int -> String ->
 #### `onAfterUpdateSettings`
 
 ``` purescript
-onAfterUpdateSettings :: forall eff d a. Handsontable d -> Eff (hot :: HOT | eff) a -> Eff (hot :: HOT | eff) Unit
+onAfterUpdateSettings :: forall eff d a. Handsontable d -> (Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
 ```
 
 #### `onAfterValidate`
@@ -147,13 +147,13 @@ onBeforeChange :: forall eff d a dat. Handsontable d -> (forall h. STArray h dat
 #### `onBeforeChangeRender`
 
 ``` purescript
-onBeforeChangeRender :: forall eff d a. Handsontable d -> Eff (hot :: HOT | eff) a -> Eff (hot :: HOT | eff) Unit
+onBeforeChangeRender :: forall eff d a. Handsontable d -> (Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
 ```
 
 #### `onBeforeDrawBorders`
 
 ``` purescript
-onBeforeDrawBorders :: forall eff d a. Handsontable d -> Eff (hot :: HOT | eff) a -> Eff (hot :: HOT | eff) Unit
+onBeforeDrawBorders :: forall eff d a. Handsontable d -> (Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
 ```
 
 #### `onBeforeGetCellMeta`
@@ -165,25 +165,25 @@ onBeforeGetCellMeta :: forall eff d a. Handsontable d -> (Int -> Int -> Foreign 
 #### `onBeforeInit`
 
 ``` purescript
-onBeforeInit :: forall eff d a. Handsontable d -> Eff (hot :: HOT | eff) a -> Eff (hot :: HOT | eff) Unit
+onBeforeInit :: forall eff d a. Handsontable d -> (Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
 ```
 
 #### `onBeforeInitWalkontable`
 
 ``` purescript
-onBeforeInitWalkontable :: forall eff d a. Handsontable d -> Eff (hot :: HOT | eff) a -> Eff (hot :: HOT | eff) Unit
+onBeforeInitWalkontable :: forall eff d a. Handsontable d -> (Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
 ```
 
 #### `onBeforeKeyDown`
 
 ``` purescript
-onBeforeKeyDown :: forall eff d a. Handsontable d -> (DOMEvent -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
+onBeforeKeyDown :: forall eff d a. Handsontable d -> (Event -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
 ```
 
 #### `onBeforeOnCellMouseDown`
 
 ``` purescript
-onBeforeOnCellMouseDown :: forall eff d a. Handsontable d -> (DOMEvent -> Coords -> HTMLElement -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
+onBeforeOnCellMouseDown :: forall eff d a. Handsontable d -> (Event -> Coords -> HTMLElement -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
 ```
 
 #### `onBeforeRemoveCol`
@@ -219,13 +219,13 @@ onBeforeValidate :: forall eff d a. Handsontable d -> (Foreign -> Int -> String 
 #### `onConstruct`
 
 ``` purescript
-onConstruct :: forall eff d a. Handsontable d -> Eff (hot :: HOT | eff) a -> Eff (hot :: HOT | eff) Unit
+onConstruct :: forall eff d a. Handsontable d -> (Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
 ```
 
 #### `onInit`
 
 ``` purescript
-onInit :: forall eff d a. Handsontable d -> Eff (hot :: HOT | eff) a -> Eff (hot :: HOT | eff) Unit
+onInit :: forall eff d a. Handsontable d -> (Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
 ```
 
 #### `onModifyCol`

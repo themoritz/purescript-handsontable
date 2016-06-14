@@ -15,7 +15,7 @@ handsontableNode :: forall eff d r. HTMLElement -> Options d r -> Eff (hot :: HO
 #### `alter`
 
 ``` purescript
-alter :: forall eff d a. AlterAction -> Maybe Int -> Int -> Maybe ChangeSource -> Boolean -> Handsontable d -> Eff (hot :: HOT | eff) Unit
+alter :: forall eff d. AlterAction -> Maybe Int -> Int -> Maybe ChangeSource -> Boolean -> Handsontable d -> Eff (hot :: HOT | eff) Unit
 ```
 
 Insert new row(s) above the row at given index:
@@ -44,6 +44,8 @@ Get the index of first visible column.
 ``` purescript
 countCols :: forall eff d. Handsontable d -> Eff (hot :: HOT | eff) Int
 ```
+
+Returns the total number of columns in the grid.
 
 #### `countEmptyCols`
 
@@ -93,6 +95,8 @@ Total number of rows in the grid.
 countVisibleCols :: forall eff d. Handsontable d -> Eff (hot :: HOT | eff) Int
 ```
 
+Number of visible columns. Returns `-1` if the table is not visible
+
 #### `countVisibleRows`
 
 ``` purescript
@@ -131,6 +135,8 @@ Returns `Nothing` if the TD is not rendered on screen (probably because that par
 ``` purescript
 getCellEditor :: forall eff d. Handsontable d -> Eff (hot :: HOT | eff) CellEditor
 ```
+
+Get the cell editor by row and col.
 
 #### `getCellMeta`
 
@@ -360,6 +366,8 @@ Remove `key` property object from cell meta data corresponding to params of cell
 ``` purescript
 render :: forall eff d. Handsontable d -> Eff (hot :: HOT | eff) Unit
 ```
+
+Re-render the table.
 
 #### `rowOffset`
 

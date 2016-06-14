@@ -12,12 +12,12 @@ As a consequence, there is no additional layer of type-safety and values get pas
 Purescript functions can be passed on as well (callbacks).
 Use `mkFnN` from `Data.Function` to convert Purescript functions to uncurried Javascript functions.
 
-## Test
+## Test the example
 
 ```bash
 npm install
-bower update
-gulp bundle
+bower install
+gulp browserify
 python -m SimpleHTTPServer
 ```
 

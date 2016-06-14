@@ -42,6 +42,12 @@ type DataTable d = Array (Array d)
 type Coords = { row :: Int, col :: Int }
 ```
 
+#### `Change`
+
+``` purescript
+type Change d = { row :: Int, col :: Int, old :: Maybe d, new :: d }
+```
+
 #### `ChangeSource`
 
 ``` purescript
@@ -59,7 +65,7 @@ data ChangeSource
 
 ##### Instances
 ``` purescript
-instance showChangeSource :: Show ChangeSource
+Show ChangeSource
 ```
 
 #### `readChangeSource`
@@ -80,7 +86,7 @@ data AlterAction
 
 ##### Instances
 ``` purescript
-instance showAlterAction :: Show AlterAction
+Show AlterAction
 ```
 
 #### `PopulateMethod`
@@ -94,7 +100,7 @@ data PopulateMethod
 
 ##### Instances
 ``` purescript
-instance showPopulateMethod :: Show PopulateMethod
+Show PopulateMethod
 ```
 
 #### `readPopulateMethod`
@@ -115,7 +121,7 @@ data Direction
 
 ##### Instances
 ``` purescript
-instance showDirection :: Show Direction
+Show Direction
 ```
 
 
