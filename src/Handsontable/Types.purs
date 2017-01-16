@@ -1,9 +1,7 @@
 module Handsontable.Types where
 
-import Prelude (class Show, (++), ($), pure)
-import Data.Either (Either(Left))
+import Prelude (class Show)
 import Data.Maybe (Maybe)
-import Data.Foreign
 
 foreign import data HOT :: !
 
@@ -50,17 +48,16 @@ instance showChangeSource :: Show ChangeSource where
   show ChangeSpliceCol         = "spliceCol"
   show ChangeSpliceRow         = "spliceRow"
 
-readChangeSource :: String -> F ChangeSource
-readChangeSource "alter"             = pure ChangeAlter
-readChangeSource "empty"             = pure ChangeEmpty
-readChangeSource "edit"              = pure ChangeEdit
-readChangeSource "populateFromArray" = pure ChangePopulateFromArray
-readChangeSource "loadData"          = pure ChangeLoadData
-readChangeSource "autofill"          = pure ChangeAutofill
-readChangeSource "paste"             = pure ChangePaste
-readChangeSource "spliceCol"         = pure ChangeSpliceCol
-readChangeSource "spliceRow"         = pure ChangeSpliceRow
-readChangeSource s                   = Left $ TypeMismatch ("'" ++ s ++ "'") " a valid change cause value"
+readChangeSource :: Partial => String -> ChangeSource
+readChangeSource "alter"             = ChangeAlter
+readChangeSource "empty"             = ChangeEmpty
+readChangeSource "edit"              = ChangeEdit
+readChangeSource "populateFromArray" = ChangePopulateFromArray
+readChangeSource "loadData"          = ChangeLoadData
+readChangeSource "autofill"          = ChangeAutofill
+readChangeSource "paste"             = ChangePaste
+readChangeSource "spliceCol"         = ChangeSpliceCol
+readChangeSource "spliceRow"         = ChangeSpliceRow
 
 data AlterAction
   = InsertRow
@@ -84,11 +81,10 @@ instance showPopulateMethod :: Show PopulateMethod where
   show ShiftDown  = "shift_down"
   show ShiftRight = "shift_right"
 
-readPopulateMethod :: String -> F PopulateMethod
-readPopulateMethod "overwrite"  = pure Overwrite
-readPopulateMethod "shift_down" = pure ShiftDown
-readPopulateMethod "shift_right" = pure ShiftRight
-readPopulateMethod s             = Left $ TypeMismatch ("'" ++ s ++ "'") " a valid populate method value"
+readPopulateMethod :: Partial => String -> PopulateMethod
+readPopulateMethod "overwrite"   = Overwrite
+readPopulateMethod "shift_down"  = ShiftDown
+readPopulateMethod "shift_right" = ShiftRight
 
 data Direction
   = DirectionLeft

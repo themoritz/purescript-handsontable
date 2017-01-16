@@ -59,12 +59,12 @@ import Prelude (Unit, ($), flip, (>>=), (<$>))
 import Control.Monad.Eff (Eff)
 import Control.Monad.ST (ST, runST)
 import Data.Nullable (Nullable, toMaybe)
-import Data.Either.Unsafe (fromRight)
 import Data.Array.ST (STArray, thaw)
 import DOM.HTML.Types (HTMLElement())
 import DOM.Event.Types (Event())
+import Partial.Unsafe (unsafePartial)
 
-import Data.Function (Fn2, Fn3, runFn3, runFn2)
+import Data.Function.Uncurried (Fn2, Fn3, runFn3, runFn2)
 import Data.Foreign (Foreign)
 
 import Handsontable.Types
@@ -77,7 +77,7 @@ onAfterCellMetaReset self fn = runFn3 addHookImpl "afterCellMetaReset" (\_ _ _ _
 foreign import onAfterChangeImpl :: forall eff d a. Fn2 ((Array {row :: Int, col :: Int, old :: Nullable d, new :: d}) -> String -> Eff (hot :: HOT | eff) a) (Handsontable d) (Eff (hot :: HOT | eff) Unit)
 
 onAfterChange :: forall eff d a. Handsontable d -> (Array (Change d) -> ChangeSource -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
-onAfterChange self fn = runFn2 onAfterChangeImpl (\changes source -> fn (procChange <$> changes) (fromRight $ readChangeSource source)) self
+onAfterChange self fn = runFn2 onAfterChangeImpl (\changes source -> fn (procChange <$> changes) (unsafePartial $ readChangeSource source)) self
   where procChange change = change { old = toMaybe change.old }
 
 onAfterCreateCol :: forall eff d a. Handsontable d -> (Int -> Int -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
@@ -163,7 +163,7 @@ onAfterUpdateSettings :: forall eff d a. Handsontable d -> (Eff (hot :: HOT | ef
 onAfterUpdateSettings self fn = runFn3 addHookImpl "afterUpdateSettings" (\_ _ _ _ _ _ -> fn) self
 
 onAfterValidate :: forall eff d a. Handsontable d -> (Boolean -> Foreign -> Int -> String -> ChangeSource -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
-onAfterValidate self fn = runFn3 addHookImpl "afterValidate" (\isValid value row prop source _ -> fn isValid value row prop (fromRight $ readChangeSource source)) self
+onAfterValidate self fn = runFn3 addHookImpl "afterValidate" (\isValid value row prop source _ -> fn isValid value row prop (unsafePartial $ readChangeSource source)) self
 
 onBeforeAutoFill :: forall eff d a dat. Handsontable d -> (Coords -> Coords -> DataTable dat -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
 onBeforeAutoFill self fn = runFn3 addHookImpl "beforeAutoFill" (\start end dat _ _ _ -> fn start end dat) self
@@ -173,7 +173,7 @@ onBeforeAutoFill self fn = runFn3 addHookImpl "beforeAutoFill" (\start end dat _
 
 -- TODO: Implement proper API for modifying the changes array?
 onBeforeChange :: forall eff d a dat. Handsontable d -> (forall h. STArray h dat -> ChangeSource -> Eff (hot :: HOT, st :: ST h | eff) a) -> Eff (hot :: HOT | eff) Unit
-onBeforeChange self fn = runFn3 addHookImpl "beforeChange" (\changes source _ _ _ _ -> runST (thaw changes >>= flip fn (fromRight $ readChangeSource source))) self
+onBeforeChange self fn = runFn3 addHookImpl "beforeChange" (\changes source _ _ _ _ -> runST (thaw changes >>= flip fn (unsafePartial $ readChangeSource source))) self
 
 onBeforeChangeRender :: forall eff d a. Handsontable d -> (Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
 onBeforeChangeRender self fn = runFn3 addHookImpl "beforeChangeRender" (\_ _ _ _ _ _ -> fn) self
@@ -215,7 +215,7 @@ onBeforeSetRangeEnd self fn = runFn3 addHookImpl "beforeSetRangeEnd" (\coords _ 
 -- TODO: missing in API doc
 
 onBeforeValidate :: forall eff d a. Handsontable d -> (Foreign -> Int -> String -> ChangeSource -> Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
-onBeforeValidate self fn = runFn3 addHookImpl "beforeValidate" (\value row prop source _ _ -> fn value row prop (fromRight $ readChangeSource source)) self
+onBeforeValidate self fn = runFn3 addHookImpl "beforeValidate" (\value row prop source _ _ -> fn value row prop (unsafePartial $ readChangeSource source)) self
 
 onConstruct :: forall eff d a. Handsontable d -> (Eff (hot :: HOT | eff) a) -> Eff (hot :: HOT | eff) Unit
 onConstruct self fn = runFn3 addHookImpl "construct" (\_ _ _ _ _ _ -> fn) self

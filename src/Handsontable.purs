@@ -77,7 +77,7 @@ import Control.Monad.Eff (Eff)
 import Data.Maybe (Maybe(Just, Nothing))
 import Data.Tuple (Tuple(Tuple))
 import Data.Foreign (Foreign)
-import Data.Function (Fn2, Fn3, Fn5, Fn4, Fn7, Fn10, Fn6, runFn2, runFn3, runFn5, runFn4, runFn7, runFn10, runFn6)
+import Data.Function.Uncurried (Fn2, Fn3, Fn5, Fn4, Fn7, Fn10, Fn6, runFn2, runFn3, runFn5, runFn4, runFn7, runFn10, runFn6)
 import Data.Nullable (Nullable, toNullable, toMaybe)
 
 import DOM.HTML.Types (HTMLElement())

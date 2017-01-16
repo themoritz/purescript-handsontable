@@ -17,17 +17,6 @@ var exampleSources = [
   'example/src/**/*.purs'
 ]
 
-gulp.task('docs', function () {
-  return purescript.pscDocs({
-    src: sources,
-    docgen: {
-      'Handsontable': 'docs/Handsontable.md',
-      'Handsontable.Hooks': 'docs/Handsontable/Hooks.md',
-      'Handsontable.Types': 'docs/Handsontable/Types.md'
-    }
-  })
-})
-
 gulp.task('make', function () {
   return purescript.psc({
     src: sources,

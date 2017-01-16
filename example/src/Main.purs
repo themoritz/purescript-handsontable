@@ -1,11 +1,11 @@
 module Main where
 import Handsontable
 import Control.Monad.Eff (Eff)
-import Control.Monad.Eff.Console (CONSOLE, print, log)
+import Control.Monad.Eff.Console (CONSOLE, logShow, log)
 import DOM.Event.Event (type_)
 import DOM.Event.Types (EventType(..))
 import Data.Foldable (for_)
-import Data.Function (mkFn3)
+import Data.Function.Uncurried (mkFn3)
 import Data.Maybe (Maybe(Nothing, Just))
 import Handsontable.Hooks (onBeforeOnCellMouseDown, onAfterChange)
 import Handsontable.Types (HOT, AlterAction(InsertRow), Direction(DirectionDown), PopulateMethod(ShiftDown))
@@ -44,7 +44,7 @@ main = do
     }
 
   hot `onAfterChange` \changes cause -> do
-    print cause
+    logShow cause
     for_ changes \change -> do
       log $ "row " <> show change.row <> " col " <> show change.col <> " old " <> show change.old <> " new " <> show change.new
   hot `onBeforeOnCellMouseDown` \ev coords _ ->
@@ -103,7 +103,7 @@ main = do
   spliceRow 0 0 0 [] hot
   unlisten hot
   updateSettings {readOnly: false} false hot
-  validateCells hot \val -> print val
+  validateCells hot \val -> logShow val
 
 setCellProps :: forall r. Int -> Int -> { checkedTemplate :: Boolean | r } -> { checkedTemplate :: Boolean | r }
 setCellProps row col prop = if row == col
