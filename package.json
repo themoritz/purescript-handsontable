@@ -1,14 +1,5 @@
 {
-  "name": "purescript-handsontable",
-  "version": "0.2.0",
-  "contributors": [
-    "Moritz Drexl <mdrexl@fastmail.fm>"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/themoritz/purescript-handsontable.git"
-  },
-  "license": "MIT",
+  "private": true,
   "devDependencies": {
     "browserify": "^13.0.1",
     "debowerify": "^1.5.0",
