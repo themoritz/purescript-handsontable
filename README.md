@@ -6,7 +6,7 @@ Minimal Purescript bindings for [Handsontable](http://handsontable.com/).
 
 These bindings are minimal in a sense that, where possible, the direct
 correspondence between Javascript objects and Purescript records is exploited.
-The Handsontable [options](http://docs.handsontable.com/0.25.1/Options.html) can
+The Handsontable [options](http://docs.handsontable.com/0.30.1/Options.html) can
 be configured directly via Purescript records.
 
 As a consequence, there is no additional layer of type-safety and values get
@@ -38,3 +38,5 @@ Then navigate to `http://localhost:8000/example/`.
 Module documentation is [published on Pursuit](http://pursuit.purescript.org/packages/purescript-handsontable).
 
 You can find an example usage [here](example/src/Main.purs).
+
+Example use in a larger project can be found [here](https://github.com/metrix-frs/baresto/blob/development/src/Component/Handsontable.purs).
