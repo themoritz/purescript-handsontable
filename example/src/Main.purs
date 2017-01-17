@@ -1,4 +1,5 @@
 module Main where
+
 import Handsontable
 import Control.Monad.Eff (Eff)
 import Control.Monad.Eff.Console (CONSOLE, logShow, log)
@@ -24,11 +25,11 @@ main = do
     , columns:
       [ { type: "numeric"
         , format: "0,0.00"
-        , language: "en"
+        , language: "en-US"
         }
       , { type: "numeric"
         , format: "0,0.0"
-        , language: "en"
+        , language: "en-US"
         }
       ]
     , customBorders:

@@ -41,7 +41,7 @@ gulp.task('bundle', ['example'], function () {
 
 gulp.task('browserify', ['bundle'], function () {
   return browserify('dist/main.js')
-    .require(['moment', 'pikaday', 'zeroclipboard'])
+    .require(['moment', 'pikaday', 'numbro', 'zeroclipboard'])
     .bundle()
     .pipe(vinyl('handsontable.js'))
     .pipe(gulp.dest('example'))

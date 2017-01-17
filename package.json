@@ -2,16 +2,16 @@
   "private": true,
   "devDependencies": {
     "browserify": "^13.0.1",
-    "debowerify": "^1.5.0",
     "gulp": "^3.9.0",
     "gulp-purescript": "^1.0.0",
-    "purescript": "^0.10.1",
+    "purescript": "^0.10.5",
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
-    "handsontable": "^0.25.1",
-    "moment": "^2.13.0",
-    "pikaday": "^1.4.0",
-    "zeroclipboard": "^2.2.0"
+    "handsontable": "^0.30.1",
+    "moment": "^2.17.1",
+    "pikaday": "^1.5.1",
+    "numbro": "^1.9.3",
+    "zeroclipboard": "^2.3.0"
   }
 }
