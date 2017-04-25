@@ -1,14 +1,15 @@
 module Handsontable.Types where
 
 import Prelude (class Show)
+import Control.Monad.Eff (kind Effect)
 import Data.Maybe (Maybe)
 
-foreign import data HOT :: !
+foreign import data HOT :: Effect
 
-foreign import data Handsontable :: * -> *
-foreign import data CellEditor :: *
+foreign import data Handsontable :: Type -> Type
+foreign import data CellEditor :: Type
 
-foreign import data MaybeNull :: * -> *
+foreign import data MaybeNull :: Type -> Type
 
 type Options d r = { data :: DataTable d | r }
 

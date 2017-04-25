@@ -10,7 +10,7 @@ import Data.Function.Uncurried (mkFn3)
 import Data.Maybe (Maybe(Nothing, Just))
 import Handsontable.Hooks (onBeforeOnCellMouseDown, onAfterChange)
 import Handsontable.Types (HOT, AlterAction(InsertRow), Direction(DirectionDown), PopulateMethod(ShiftDown))
-import Prelude (Unit, (==), bind, (<>), ($), show)
+import Prelude (Unit, (==), bind, (<>), ($), show, discard)
 
 main :: Eff (hot :: HOT, console :: CONSOLE) Unit
 main = do
@@ -56,47 +56,47 @@ main = do
   offset <- colOffset hot
   log $ "offset: " <> show offset
   clear hot
-  colOffset hot
-  countCols hot
-  countEmptyCols false hot
-  countEmptyRows false hot
-  countRenderedCols hot
-  countRenderedRows hot
-  countRows hot
-  countVisibleCols hot
-  countVisibleRows hot
+  _ <- colOffset hot
+  _ <- countCols hot
+  _ <- countEmptyCols false hot
+  _ <- countEmptyRows false hot
+  _ <- countRenderedCols hot
+  _ <- countRenderedRows hot
+  _ <- countRows hot
+  _ <- countVisibleCols hot
+  _ <- countVisibleRows hot
   deselectCell hot
-  getCell 0 0 false hot
-  getCellMeta 0 0 hot
-  getColHeader hot
-  getColWidth 0 hot
+  _ <- getCell 0 0 false hot
+  _ <- getCellMeta 0 0 hot
+  _ <- getColHeader hot
+  _ <- getColWidth 0 hot
   copy <- getCopyableData 0 0 1 1 hot
   log $ "copy: " <> copy
-  getData Nothing hot
-  getDataAtCell 0 0 hot
-  getDataAtCol 0 hot
-  getDataAtRow 0 hot
-  getRowHeader hot
-  getRowHeight 0 hot
-  getSchema hot
-  getSelected hot
-  getSelectedRange hot
-  getSettings hot
-  getSourceDataAtCol 0 hot
-  getSourceDataAtRow 0 hot
-  getValue hot
-  hasColHeaders hot
-  hasRowHeaders hot
-  isEmptyCol 0 hot
-  isEmptyRow 0 hot
-  isListening hot
+  _ <- getData Nothing hot
+  _ <- getDataAtCell 0 0 hot
+  _ <- getDataAtCol 0 hot
+  _ <- getDataAtRow 0 hot
+  _ <- getRowHeader hot
+  _ <- getRowHeight 0 hot
+  _ <- getSchema hot
+  _ <- getSelected hot
+  _ <- getSelectedRange hot
+  _ <- getSettings hot
+  _ <- getSourceDataAtCol 0 hot
+  _ <- getSourceDataAtRow 0 hot
+  _ <- getValue hot
+  _ <- hasColHeaders hot
+  _ <- hasRowHeaders hot
+  _ <- isEmptyCol 0 hot
+  _ <- isEmptyRow 0 hot
+  _ <- isListening hot
   listen hot
   loadData [[10]] hot
-  populateFromArray {row: 0, col: 0} [[9]] Nothing Nothing ShiftDown DirectionDown [] hot
+  _ <- populateFromArray {row: 0, col: 0} [[9]] Nothing Nothing ShiftDown DirectionDown [] hot
   removeCellMeta 0 0 "foo" hot
   render hot
-  rowOffset hot
-  selectCell {row: 0, col: 0} Nothing false false hot
+  _ <- rowOffset hot
+  _ <- selectCell {row: 0, col: 0} Nothing false false hot
   setCellMeta 0 0 "foo" "bar" hot
   setCellMetaObject 0 0 {readOnly: false} hot
   setDataAtCell 0 0 8 Nothing hot

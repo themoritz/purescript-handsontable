@@ -34,16 +34,16 @@ gulp.task('example', function () {
 gulp.task('bundle', ['example'], function () {
   return purescript.pscBundle({
     src: 'output/**/*.js',
-    output: 'dist/main.js',
+    output: 'tmp/main.js',
     main: 'Main'
   })
 })
 
 gulp.task('browserify', ['bundle'], function () {
-  return browserify('dist/main.js')
+  return browserify('tmp/main.js')
     .require(['moment', 'pikaday', 'numbro', 'zeroclipboard'])
     .bundle()
-    .pipe(vinyl('handsontable.js'))
+    .pipe(vinyl('bundle.js'))
     .pipe(gulp.dest('example'))
 })
 
