@@ -18,21 +18,21 @@ var exampleSources = [
 ]
 
 gulp.task('make', function () {
-  return purescript.psc({
+  return purescript.compile({
     src: sources,
     ffi: foreigns
   })
 })
 
 gulp.task('example', function () {
-  return purescript.psc({
+  return purescript.compile({
     src: sources.concat(exampleSources),
     ffi: foreigns
   })
 })
 
 gulp.task('bundle', ['example'], function () {
-  return purescript.pscBundle({
+  return purescript.bundle({
     src: 'output/**/*.js',
     output: 'tmp/main.js',
     main: 'Main'
@@ -45,14 +45,6 @@ gulp.task('browserify', ['bundle'], function () {
     .bundle()
     .pipe(vinyl('bundle.js'))
     .pipe(gulp.dest('example'))
-})
-
-gulp.task('watch-browser', function () {
-  gulp.watch(sources.concat(exampleSources).concat(foreigns), 'bundle')
-})
-
-gulp.task('watch-make', function () {
-  gulp.watch(sources.concat(foreigns), 'make')
 })
 
 gulp.task('default', ['make'])

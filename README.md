@@ -28,10 +28,8 @@ dependencies that come with handsontable.
 npm install
 bower install
 gulp browserify
-python -m SimpleHTTPServer
+google-chrome-stable example/index.html
 ```
-
-Then navigate to `http://localhost:8000/example/`.
 
 ## Documentation
 
