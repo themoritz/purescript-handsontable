@@ -1,5 +1,8 @@
 # purescript-handsontable
 
+[![Latest release](http://img.shields.io/github/release/themoritz/purescript-handsontable.svg)](https://github.com/themoritz/purescript-handsontable/releases)
+[![Build status](https://travis-ci.org/themoritz/purescript-handsontable.svg?branch=master)](https://travis-ci.org/themoritz/purescript-handsontable)
+
 Minimal Purescript bindings for [Handsontable](http://handsontable.com/).
 
 ## About
